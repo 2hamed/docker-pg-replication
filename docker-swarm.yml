@@ -1,0 +1,30 @@
+version: "3"
+services:
+  pg_master:
+    image: 2hamed/pg_master
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=hamed
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=hamed
+      - PG_REP_USER=rep
+      - PG_REP_PASSWORD=123456
+    networks:
+      default:
+        aliases:
+          - pg_cluster
+  pg_slave:
+    image: 2hamed/pg_slave
+    environment:
+      - POSTGRES_USER=hamed
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=hamed
+      - PG_REP_USER=rep
+      - PG_REP_PASSWORD=123456
+    networks:
+      default:
+        aliases:
+          - pg_cluster
+volumes:
+  pg_data:
