@@ -4,7 +4,7 @@ echo "*:*:*:$PG_REP_USER:$PG_REP_PASSWORD" > ~/.pgpass
 
 chmod 0600 ~/.pgpass
 
-until ping -c 1 -W 1 ${PG_MASTER_HOST}
+until ping -c 1 -W 1 ${PG_MASTER_HOST:?missing environment variable. PG_MASTER_HOST must be set}
     do
         echo "Waiting for master to ping..."
         sleep 1s
