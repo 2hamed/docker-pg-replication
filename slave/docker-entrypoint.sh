@@ -21,7 +21,7 @@ set -e
 
 cat > ${PGDATA}/recovery.conf <<EOF
 standby_mode = on
-primary_conninfo = 'host=$PG_MASTER_HOST port=5432 user=$PG_REP_USER password=$PG_REP_PASSWORD'
+primary_conninfo = 'host=$PG_MASTER_HOST port=${PG_MASTER_PORT:-5432} user=$PG_REP_USER password=$PG_REP_PASSWORD'
 trigger_file = '/tmp/touch_me_to_promote_to_me_master'
 EOF
 chown postgres. ${PGDATA} -R
